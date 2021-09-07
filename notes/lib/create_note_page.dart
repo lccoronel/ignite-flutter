@@ -7,15 +7,37 @@ class CreateNotePage extends StatefulWidget {
 
 class _CreateNotePageState extends State<CreateNotePage> {
   var description = "";
+  var textController = TextEditingController();
+  var isEdit = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) { 
+      if (ModalRoute.of(context)!.settings.arguments != null) {
+        description = ModalRoute.of(context)!.settings.arguments as String;
+        textController.text = description;
+        isEdit = true;
+        setState(() {});
+      }
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Note"),
+        title: Text(isEdit ? "Edit Note" : "Create Note"),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.delete))
+          if (isEdit)
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context, "");
+              }, 
+              icon: Icon(Icons.delete)
+            )
         ],
       ),
       body: Padding(
@@ -24,6 +46,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextField(
+              controller: textController,
               maxLines: null,
               onChanged: (value) {
                 description = value;

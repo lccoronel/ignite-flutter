@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:notes/create_note_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -24,6 +23,25 @@ class _HomePageState extends State<HomePage> {
                 child: Card(
                   child: ListTile(
                     title: Text(notes[i]),
+                    onTap: () async {
+                      var response = await Navigator.pushNamed(
+                        context, 
+                        "/create-note", 
+                        arguments: notes[i]
+                      );
+
+                      if (response != null) {
+                        var description = response as String;
+
+                        if (response.isEmpty) {
+                          notes.removeAt(i);
+                        } else {
+                          notes[i] = (description);
+                        }
+                        
+                        setState(() {});
+                      }
+                    },
                   ),
                 ),
               ),
