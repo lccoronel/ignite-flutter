@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+// import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:split_it/modules/login/login_controller.dart';
 import 'package:split_it/modules/login/login_service.dart';
 import 'package:split_it/modules/login/login_state.dart';
@@ -89,14 +89,14 @@ class _LoginPageState extends State<LoginPage> {
                   imagePath: "assets/images/apple.png", 
                   label: "Entrar com Apple",
                   onTap: () async {
-                    final credential = await SignInWithApple.getAppleIDCredential(
-                      scopes: [
-                        AppleIDAuthorizationScopes.email,
-                        AppleIDAuthorizationScopes.fullName,
-                      ],
-                    );
+                    // final credential = await SignInWithApple.getAppleIDCredential(
+                    //   scopes: [
+                    //     AppleIDAuthorizationScopes.email,
+                    //     AppleIDAuthorizationScopes.fullName,
+                    //   ],
+                    // );
 
-                    print(credential);
+                    // print(credential);
                   },
                 )
               ),
